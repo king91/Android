@@ -1,9 +1,9 @@
 package com.example.overseas_football.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.overseas_football.R
 
-class WriteActivity : AppCompatActivity() {
+class WriteActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

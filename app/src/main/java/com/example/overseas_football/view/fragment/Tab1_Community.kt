@@ -1,10 +1,6 @@
 package com.example.overseas_football.view.fragment
 
-import android.app.Activity
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +10,7 @@ import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab1Binding
 import com.example.overseas_football.view.BaseFragment
 import com.example.overseas_football.view.LoginActivity
+import com.example.overseas_football.view.WriteActivity
 import com.example.overseas_football.viewmodel.Tab1ViewModel
 import kotlinx.android.synthetic.main.tab1.*
 import kotlinx.android.synthetic.main.tab1.view.*
@@ -24,20 +21,21 @@ class Tab1_Community : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (DataBindingUtil.inflate(inflater, R.layout.tab1, container, false) as Tab1Binding).let {
-            with(it) {
-                root.btn_login_activity.setOnClickListener {
-                    startActivity(requireActivity(), LoginActivity::class.java)
-                }
-                setLifecycleOwner(this@Tab1_Community)
-                tab1ViewModel = viewmodel
-                return root
+        (DataBindingUtil.inflate(inflater, R.layout.tab1, container, false) as Tab1Binding).run {
+            root.btn_login_activity.setOnClickListener {
+                startActivity(requireActivity(), LoginActivity::class.java)
             }
+            root.floating_btn_write.setOnClickListener {
+                startActivity(requireActivity(), WriteActivity::class.java)
+            }
+            setLifecycleOwner(this@Tab1_Community)
+            tab1ViewModel = viewmodel
+            return root
         }
     }
 
     override fun onResume() {
-        LoginORbeloginView(requireContext(), linear_belogin, floating_menu_button)
+        loginOrBeloginView(requireContext(), linear_belogin, floating_menu_button)
         super.onResume()
     }
 }

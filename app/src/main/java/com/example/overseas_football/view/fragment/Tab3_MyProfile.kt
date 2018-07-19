@@ -39,49 +39,47 @@ class Tab3_MyProfile : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (DataBindingUtil.inflate(inflater, R.layout.tab3, container, false) as Tab3Binding).let {
-            with(it) {
-                setLifecycleOwner(this@Tab3_MyProfile)
-                tab3ViewModel = viewmodel
-                basicResModelObserver()
+        (DataBindingUtil.inflate(inflater, R.layout.tab3, container, false) as Tab3Binding).run {
+            setLifecycleOwner(this@Tab3_MyProfile)
+            tab3ViewModel = viewmodel
+            basicResModelObserver()
 
-                root.circleimg_profile.setOnClickListener {
-                    CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(requireContext(), this@Tab3_MyProfile)
-                }
-                root.btn_login_activity.setOnClickListener {
-                    startActivity(Intent(requireContext(), com.example.overseas_football.view.LoginActivity::class.java))
-                }
-                root.btn_logout.setOnClickListener {
-                    openBasicDialog(requireActivity(), "로그아웃", "로그아웃 하시겠습니까?")
-                            .onPositive { dialog, which ->
-                                if (FirebaseAuth.getInstance().currentUser != null) {
-                                    FirebaseAuth.getInstance().signOut()
-                                }
-                                if (Session.getCurrentSession().isOpened) {
-                                    UserManagement.getInstance().requestLogout(object : LogoutResponseCallback() {
-                                        override fun onCompleteLogout() {
-                                            Log.e("kakao", "logout")
-                                        }
-
-                                    })
-                                }
-                                Shared().removeUser(requireActivity())
-                                isLoginViewCheck(linearLayout_Login, linearLayout_beLogin, circleimg_profile)
-                                Toast.makeText(activity, "정상적으로 로그인 되었습니다.", Toast.LENGTH_LONG).show()
-                            }.show()
-                }
-                return root
+            root.circleimg_profile.setOnClickListener {
+                CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(requireContext(), this@Tab3_MyProfile)
             }
+            root.btn_login_activity.setOnClickListener {
+                startActivity(Intent(requireContext(), com.example.overseas_football.view.LoginActivity::class.java))
+            }
+            root.btn_logout.setOnClickListener {
+                openBasicDialog(requireActivity(), "로그아웃", "로그아웃 하시겠습니까?")
+                        .onPositive { dialog, which ->
+                            if (FirebaseAuth.getInstance().currentUser != null) {
+                                FirebaseAuth.getInstance().signOut()
+                            }
+                            if (Session.getCurrentSession().isOpened) {
+                                UserManagement.getInstance().requestLogout(object : LogoutResponseCallback() {
+                                    override fun onCompleteLogout() {
+                                        Log.e("kakao", "logout")
+                                    }
+
+                                })
+                            }
+                            Shared().removeUser(requireActivity())
+                            isLoginViewCheck(linearLayout_Login, linearLayout_beLogin, circleimg_profile)
+                            Toast.makeText(activity, "정상적으로 로그인 되었습니다.", Toast.LENGTH_LONG).show()
+                        }.show()
+            }
+            return root
         }
     }
 
-    fun basicResModelObserver() {
+    private fun basicResModelObserver() {
         viewmodel.basicResModel.observe(this, Observer {
             if (it!!.result == "success") {
                 val user = Shared().getUser(requireContext())
                 if (user != null) {
                     user.img = it.message
-                    Shared().saveUser(requireContext(),user)
+                    Shared().saveUser(requireContext(), user)
                     circleimg_profile.background = null
                     Glide.with(requireActivity())
                             .load(Constants.BASE_URL + "glideProfile?img=" + it.message)

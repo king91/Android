@@ -27,7 +27,7 @@ open class BaseFragment : Fragment() {
                 .negativeText("취소")
                 .positiveText("확인")
     }
-    fun LoginORbeloginView(context: Context, linearLayout: LinearLayout, floatingActionMenu: FloatingActionMenu) {
+    fun loginOrBeloginView(context: Context, linearLayout: LinearLayout, floatingActionMenu: FloatingActionMenu) {
         if (Shared().getUser(context) != null) {
             linearLayout.visibility = View.GONE
             floatingActionMenu.visibility = View.VISIBLE

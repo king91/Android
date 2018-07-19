@@ -33,11 +33,4 @@ class MainActivity : BaseActivity() {
             }
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        if(isExistUser()){
-
-        }
-    }
 }

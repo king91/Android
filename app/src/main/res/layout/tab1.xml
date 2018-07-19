@@ -73,6 +73,7 @@
                 app:fab_label="인기순" />
 
             <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/floating_btn_write"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/write"
