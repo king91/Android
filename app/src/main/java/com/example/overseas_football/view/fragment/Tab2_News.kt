@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.overseas_football.BuildConfig
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab2Binding
 import com.example.overseas_football.di.Presenter
@@ -29,11 +30,10 @@ class Tab2_News : BaseFragment() {
         (DataBindingUtil.inflate(inflater, R.layout.tab2, container, false) as Tab2Binding).let {
             with(it) {
                 tab2viewmodel = tab2ViewModel
-                val apiKey = requireContext().getString(R.string.news_apikey)
                 root.swipelayout.isRefreshing = true
-                tab2ViewModel.getNews(apiKey)
+                tab2ViewModel.getNews(BuildConfig.NEWS_API_KEY)
                 root.swipelayout.setOnRefreshListener {
-                    tab2ViewModel.getNews(apiKey)
+                    tab2ViewModel.getNews(BuildConfig.NEWS_API_KEY)
                 }
                 observerNews()
                 return root

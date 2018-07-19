@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">해축갤</string>
-    <string name="news_apikey">d126cb2d94a54bf483485376a5a9ec77</string>
-    <string name="kakao_app_key">3516ab8f7d656ee8421a6180d29b79a7</string>
 </resources>

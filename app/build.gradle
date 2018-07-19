@@ -17,7 +17,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        Properties props = new Properties()
+        props.load(new FileInputStream(new File('secrets.properties')))
+
+        buildConfigField "String", "NEWS_API_KEY", "\"${props['NEWS_API_KEY']}\""
+        resValue "string", "KAKAO_API_KEY", props['KAKAO_API_KEY']
     }
+
     buildTypes {
         release {
             minifyEnabled false
