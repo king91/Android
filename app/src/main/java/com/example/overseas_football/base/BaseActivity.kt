@@ -1,4 +1,4 @@
-package com.example.overseas_football.view
+package com.example.overseas_football.base
 
 import android.app.Activity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.overseas_football.view.utill
+package com.example.overseas_football.utill
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

@@ -1,15 +1,15 @@
-package com.example.overseas_football.view
+package com.example.overseas_football
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.ActivityMainBinding
-import com.example.overseas_football.view.fragment.Tab1_Community
-import com.example.overseas_football.view.fragment.Tab2_News
-import com.example.overseas_football.view.fragment.Tab3_MyProfile
-import com.example.overseas_football.viewmodel.MainViewModel
+import com.example.overseas_football.tap1_board.Tab1_Community
+import com.example.overseas_football.tap2_news.Tab2_News
+import com.example.overseas_football.tap3_profile.Tab3_MyProfile
+import com.example.overseas_football.MainViewModel
+import com.example.overseas_football.base.BaseActivity
 
 
 class MainActivity : BaseActivity() {

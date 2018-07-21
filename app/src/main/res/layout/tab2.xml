@@ -6,7 +6,7 @@
 
         <variable
             name="tab2viewmodel"
-            type="com.example.overseas_football.viewmodel.Tab2ViewModel" />
+            type="com.example.overseas_football.tap2_news.Tab2ViewModel" />
     </data>
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"

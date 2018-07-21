@@ -1,4 +1,4 @@
-package com.example.overseas_football.view.fragment
+package com.example.overseas_football.tap2_news
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -12,9 +12,7 @@ import com.example.overseas_football.BuildConfig
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab2Binding
 import com.example.overseas_football.di.Presenter
-import com.example.overseas_football.view.BaseFragment
-import com.example.overseas_football.view.adapter.NewsAdapter
-import com.example.overseas_football.viewmodel.Tab2ViewModel
+import com.example.overseas_football.base.BaseFragment
 import kotlinx.android.synthetic.main.tab2.*
 import kotlinx.android.synthetic.main.tab2.view.*
 import org.koin.android.ext.android.inject

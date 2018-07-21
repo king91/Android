@@ -1,10 +1,9 @@
-package com.example.overseas_football.view
+package com.example.overseas_football.base
 
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.View
 import android.widget.LinearLayout
@@ -14,7 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.overseas_football.R
 import com.example.overseas_football.network.Constants
-import com.example.overseas_football.view.utill.Shared
+import com.example.overseas_football.utill.Shared
 import com.github.clans.fab.FloatingActionMenu
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.tab3.*

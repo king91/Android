@@ -1,4 +1,4 @@
-package com.example.overseas_football.view.fragment
+package com.example.overseas_football.tap1_board
 
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab1Binding
-import com.example.overseas_football.view.BaseFragment
-import com.example.overseas_football.view.LoginActivity
-import com.example.overseas_football.view.WriteActivity
-import com.example.overseas_football.viewmodel.Tab1ViewModel
+import com.example.overseas_football.base.BaseFragment
+import com.example.overseas_football.login.LoginActivity
 import kotlinx.android.synthetic.main.tab1.*
 import kotlinx.android.synthetic.main.tab1.view.*
 

@@ -7,7 +7,7 @@
 
         <variable
             name="Tab1ViewModel"
-            type="com.example.overseas_football.viewmodel.Tab1ViewModel" />
+            type="com.example.overseas_football.tap1_board.Tab1ViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

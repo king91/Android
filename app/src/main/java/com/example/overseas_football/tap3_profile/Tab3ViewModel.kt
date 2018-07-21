@@ -1,11 +1,11 @@
-package com.example.overseas_football.viewmodel
+package com.example.overseas_football.tap3_profile
 
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.example.overseas_football.model.BasicResModel
 import com.example.overseas_football.network.Constants
 import com.example.overseas_football.network.RetrofitClient
-import com.example.overseas_football.view.utill.BaseViewModel
+import com.example.overseas_football.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers

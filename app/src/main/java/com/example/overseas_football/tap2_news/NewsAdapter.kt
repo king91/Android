@@ -1,4 +1,4 @@
-package com.example.overseas_football.view.adapter
+package com.example.overseas_football.tap2_news
 
 import android.content.Context
 import android.content.Intent

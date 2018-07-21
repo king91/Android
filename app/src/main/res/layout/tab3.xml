@@ -6,7 +6,7 @@
 
         <variable
             name="Tab3ViewModel"
-            type="com.example.overseas_football.viewmodel.Tab3ViewModel" />
+            type="com.example.overseas_football.tap3_profile.Tab3ViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

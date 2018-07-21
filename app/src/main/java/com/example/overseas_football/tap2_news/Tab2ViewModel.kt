@@ -1,10 +1,10 @@
-package com.example.overseas_football.viewmodel
+package com.example.overseas_football.tap2_news
 
 import android.arch.lifecycle.MutableLiveData
 import com.example.overseas_football.model.Articles
 import com.example.overseas_football.network.Constants
 import com.example.overseas_football.network.RetrofitClient
-import com.example.overseas_football.view.utill.BaseViewModel
+import com.example.overseas_football.base.BaseViewModel
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

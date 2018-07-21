@@ -1,4 +1,4 @@
-package com.example.overseas_football.view.fragment
+package com.example.overseas_football.tap3_profile
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
@@ -14,10 +14,10 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab3Binding
+import com.example.overseas_football.login.LoginActivity
 import com.example.overseas_football.network.Constants
-import com.example.overseas_football.view.BaseFragment
-import com.example.overseas_football.view.utill.Shared
-import com.example.overseas_football.viewmodel.Tab3ViewModel
+import com.example.overseas_football.base.BaseFragment
+import com.example.overseas_football.utill.Shared
 import com.google.firebase.auth.FirebaseAuth
 import com.kakao.auth.Session
 import com.kakao.usermgmt.UserManagement
@@ -48,7 +48,7 @@ class Tab3_MyProfile : BaseFragment() {
                 CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(requireContext(), this@Tab3_MyProfile)
             }
             root.btn_login_activity.setOnClickListener {
-                startActivity(Intent(requireContext(), com.example.overseas_football.view.LoginActivity::class.java))
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
             }
             root.btn_logout.setOnClickListener {
                 openBasicDialog(requireActivity(), "로그아웃", "로그아웃 하시겠습니까?")

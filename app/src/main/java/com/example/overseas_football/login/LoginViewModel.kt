@@ -1,4 +1,4 @@
-package com.example.overseas_football.viewmodel
+package com.example.overseas_football.login
 
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
@@ -7,7 +7,7 @@ import com.example.overseas_football.R
 import com.example.overseas_football.model.User
 import com.example.overseas_football.network.Constants
 import com.example.overseas_football.network.RetrofitClient
-import com.example.overseas_football.view.utill.BaseViewModel
+import com.example.overseas_football.base.BaseViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

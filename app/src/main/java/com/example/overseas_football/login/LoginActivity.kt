@@ -1,9 +1,6 @@
-package com.example.overseas_football.view
+package com.example.overseas_football.login
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -11,9 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.ActivityLoginBinding
-import com.example.overseas_football.view.utill.Shared
-import com.example.overseas_football.viewmodel.LoginViewModel
-import com.example.overseas_football.viewmodel.Tab1ViewModel
+import com.example.overseas_football.utill.Shared
+import com.example.overseas_football.base.BaseActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException

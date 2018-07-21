@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.overseas_football.view.LoginActivity">
+    tools:context="com.example.overseas_football.login.LoginActivity">
 
     <data>
 
         <variable
             name="loginViewModel"
-            type="com.example.overseas_football.viewmodel.LoginViewModel" />
+            type="com.example.overseas_football.login.LoginViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
