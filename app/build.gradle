@@ -22,6 +22,7 @@ android {
         props.load(new FileInputStream(new File('secrets.properties')))
 
         buildConfigField "String", "NEWS_API_KEY", "\"${props['NEWS_API_KEY']}\""
+        buildConfigField "String", "BASE_URL", "\"${props['BASE_URL']}\""
         resValue "string", "KAKAO_API_KEY", props['KAKAO_API_KEY']
     }
 
