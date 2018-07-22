@@ -10,20 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.overseas_football.BuildConfig
 import com.example.overseas_football.R
-import com.example.overseas_football.databinding.Tab2Binding
-import com.example.overseas_football.di.Presenter
 import com.example.overseas_football.base.BaseFragment
+import com.example.overseas_football.databinding.Tab2Binding
 import kotlinx.android.synthetic.main.tab2.*
 import kotlinx.android.synthetic.main.tab2.view.*
-import org.koin.android.ext.android.inject
 
 class Tab2_News : BaseFragment() {
+
     private val tab2ViewModel: Tab2ViewModel by lazy {
         ViewModelProviders
                 .of(this@Tab2_News)
                 .get(Tab2ViewModel::class.java)
     }
-    private val apiManager: Presenter by inject()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (DataBindingUtil.inflate(inflater, R.layout.tab2, container, false) as Tab2Binding).let {
             with(it) {

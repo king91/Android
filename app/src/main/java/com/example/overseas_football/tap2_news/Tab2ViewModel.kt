@@ -11,6 +11,7 @@ import io.reactivex.schedulers.Schedulers
 import org.json.JSONArray
 
 class Tab2ViewModel : BaseViewModel() {
+
     val newsList = MutableLiveData<ArrayList<Articles>>()
     fun getNews(news_apikey: String) {
         RetrofitClient()

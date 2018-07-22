@@ -4,30 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context=".tap1_board.WriteActivity">
 
     <include layout="@layout/include_toolbar" />
 
-    <ImageView
-        android:id="@+id/imgview"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <EditText
-        android:id="@+id/edit_content"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@null"
-        android:hint="글을 작성해주세요."
-        android:textSize="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgview" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/framelayout"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:id="@+id/imgview"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+
+                <ImageView
+                    android:id="@+id/txt_img_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/cancel_album"
+                    android:text="reer" />
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/edit_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@null"
+                android:hint="글을 작성해주세요."
+                android:textSize="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/framelayout" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="wrap_content"
@@ -38,7 +67,11 @@
         app:menu_colorNormal="#1B64AA">
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floating_btn_camera"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/camera_floating_button"
+            app:fab_colorNormal="#1B64AA"
+            app:fab_label="사진추가" />
     </com.github.clans.fab.FloatingActionMenu>
 </android.support.constraint.ConstraintLayout>
