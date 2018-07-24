@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.overseas_football.BuildConfig
 import com.example.overseas_football.R
 import com.example.overseas_football.base.BaseFragment
 import com.example.overseas_football.databinding.Tab2Binding
@@ -16,7 +15,6 @@ import kotlinx.android.synthetic.main.tab2.*
 import kotlinx.android.synthetic.main.tab2.view.*
 
 class Tab2_News : BaseFragment() {
-
     private val tab2ViewModel: Tab2ViewModel by lazy {
         ViewModelProviders
                 .of(this@Tab2_News)
@@ -28,9 +26,9 @@ class Tab2_News : BaseFragment() {
             with(it) {
                 tab2viewmodel = tab2ViewModel
                 root.swipelayout.isRefreshing = true
-                tab2ViewModel.getNews(BuildConfig.NEWS_API_KEY)
+                tab2ViewModel.getNews()
                 root.swipelayout.setOnRefreshListener {
-                    tab2ViewModel.getNews(BuildConfig.NEWS_API_KEY)
+                    tab2ViewModel.getNews()
                 }
                 observerNews()
                 return root
@@ -48,6 +46,5 @@ class Tab2_News : BaseFragment() {
 
             }
         })
-
     }
 }

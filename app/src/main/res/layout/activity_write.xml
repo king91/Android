@@ -16,8 +16,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <FrameLayout
@@ -31,10 +31,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                 <ImageView
-                    android:scaleType="fitXY"
                     android:id="@+id/imgview"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp" />
+                    android:layout_height="250dp"
+                    android:scaleType="fitXY" />
 
                 <ImageView
                     android:id="@+id/txt_img_remove"
@@ -74,4 +74,14 @@
             app:fab_colorNormal="#1B64AA"
             app:fab_label="사진추가" />
     </com.github.clans.fab.FloatingActionMenu>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

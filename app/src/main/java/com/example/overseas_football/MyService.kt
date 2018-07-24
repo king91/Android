@@ -1,13 +1,23 @@
 package com.example.overseas_football
 
 import android.app.Application
+import com.example.overseas_football.base.BaseViewModel
+import com.example.overseas_football.network.RetrofitClient
 import com.kakao.auth.*
+import org.koin.android.architecture.ext.viewModel
+import org.koin.android.ext.android.startKoin
+import org.koin.dsl.module.applicationContext
 
+val module = applicationContext {
+    viewModel { BaseViewModel() }
+    bean { RetrofitClient().setRetrofit(BuildConfig.BASE_URL) }
+}
 
 class MyService : Application() {
     override fun onCreate() {
         super.onCreate()
-
+        startKoin(this, listOf(module))
+//        DaggerAppComponent.builder().apiModule(ApiModule())
         KakaoSDK.init(KakaoSDKAdapter().SDKAdapter())
     }
 

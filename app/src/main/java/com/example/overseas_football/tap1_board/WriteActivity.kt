@@ -1,15 +1,17 @@
 package com.example.overseas_football.tap1_board
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.overseas_football.R
 import com.example.overseas_football.base.BaseActivity
+import com.example.overseas_football.data.Resource
+import com.example.overseas_football.model.BasicResModel
 import com.example.overseas_football.model.User
 import com.example.overseas_football.utill.Shared
 import com.theartofdev.edmodo.cropper.CropImage
@@ -54,9 +56,22 @@ class WriteActivity : BaseActivity() {
         }
 
         txt_img_remove.setOnClickListener {
-            framelayout.visibility= View.GONE
-            resultCropImage=null
+            framelayout.visibility = View.GONE
+            resultCropImage = null
         }
+        viewModel.responseData.observe(this, Observer {
+            if (it != null) {
+                when {
+                    it.loading -> progress_bar.visibility = View.VISIBLE
+                    it.error -> progress_bar.visibility = View.VISIBLE
+                    it.success -> {
+                        progress_bar.visibility = View.GONE
+                        finish()
+                    }
+                }
+            }
+
+        })
     }
 
     private fun initView() {
@@ -85,7 +100,7 @@ class WriteActivity : BaseActivity() {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             resultCropImage = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                framelayout.visibility= View.VISIBLE
+                framelayout.visibility = View.VISIBLE
                 Glide.with(this).load((resultCropImage as CropImage.ActivityResult).uri).into(imgview)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 val error = (resultCropImage as CropImage.ActivityResult).error

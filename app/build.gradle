@@ -84,6 +84,12 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.16'
     kapt 'com.google.dagger:dagger-compiler:2.16'
 
+    // Koin for Android
+    implementation "org.koin:koin-android:0.9.3"
+
+    // Koin for Android Architecture Components
+    implementation "org.koin:koin-android-architecture:0.9.3"
+
     //RxBinding
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.1.1'
 
