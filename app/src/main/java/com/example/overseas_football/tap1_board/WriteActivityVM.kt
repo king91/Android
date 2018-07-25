@@ -25,7 +25,6 @@ class WriteActivityVM : BaseViewModel() {
                         responseData.value = Resource.success(it)
                     }
                 }, onError = {
-                    Log.e("확인22", it.message)
                     responseData.value = Resource.error(it)
                 })
     }
@@ -39,10 +38,8 @@ class WriteActivityVM : BaseViewModel() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onNext = {
-                    Log.e("확인11", it.message)
                     responseData.value = Resource.success(it)
                 }, onError = {
-                    Log.e("확인22", it.message)
                     responseData.value = Resource.error(it)
                 })
     }

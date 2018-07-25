@@ -24,10 +24,12 @@ class Tab1_Community : BaseFragment() {
                 startActivity(requireActivity(), LoginActivity::class.java)
             }
             root.floating_btn_write.setOnClickListener {
+                floating_menu_button.removeAllMenuButtons()
                 startActivity(requireActivity(), WriteActivity::class.java)
             }
             setLifecycleOwner(this@Tab1_Community)
             tab1ViewModel = viewmodel
+            viewmodel.getBoard(5)
             return root
         }
     }

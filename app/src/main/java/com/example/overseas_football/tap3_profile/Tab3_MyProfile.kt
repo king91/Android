@@ -6,12 +6,14 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab3Binding
 import com.example.overseas_football.login.LoginActivity
@@ -75,15 +77,21 @@ class Tab3_MyProfile : BaseFragment() {
 
     private fun basicResModelObserver() {
         viewmodel.basicResModel.observe(this, Observer {
-            if (it!!.result == "success") {
-                val user = Shared().getUser(requireContext())
-                if (user != null) {
-                    user.img = it.message
-                    Shared().saveUser(requireContext(), user)
-                    circleimg_profile.background = null
-                    Glide.with(requireActivity())
-                            .load(Constants.BASE_URL + "glideProfile?img=" + it.message)
-                            .into(circleimg_profile)
+            val user = Shared().getUser(requireContext())
+            if (it != null && user != null) {
+                when{
+                    it.error->progress_bar.visibility=View.GONE
+                    it.loading->progress_bar.visibility=View.VISIBLE
+                    it.success->{
+                        progress_bar.visibility=View.GONE
+                        val message=it.getData()!!.message
+                        user.img = message
+                        Shared().saveUser(requireContext(), user)
+                        Glide.with(requireActivity())
+                                .load(Constants.BASE_URL + "glideProfile?img=" + message)
+                                .apply(RequestOptions().placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.defalut_profile_img)))
+                                .into(circleimg_profile)
+                    }
                 }
             }
         })

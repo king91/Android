@@ -16,7 +16,7 @@ val module = applicationContext {
 class MyService : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(module))
+//        startKoin(this, listOf(module))
 //        DaggerAppComponent.builder().apiModule(ApiModule())
         KakaoSDK.init(KakaoSDKAdapter().SDKAdapter())
     }

@@ -8,6 +8,7 @@ import com.example.overseas_football.model.User
 import com.example.overseas_football.network.Constants
 import com.example.overseas_football.network.RetrofitClient
 import com.example.overseas_football.base.BaseViewModel
+import com.example.overseas_football.data.Resource
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,26 +23,29 @@ import java.util.*
 
 
 class LoginViewModel : BaseViewModel() {
-    val userdata = MutableLiveData<User>()
-    fun GoogleLogin() {
+    val userdata = MutableLiveData<Resource<User>>()
+    fun googleLogin() {
+        userdata.value= Resource.loading(null)
         val user = FirebaseAuth.getInstance().currentUser
-        if (null == user) {
-
-        } else {
+        if (null != user) {
             RetrofitClient()
                     .setRetrofit(Constants.BASE_URL)
                     .setResister(user.email!!, user.displayName!!, "google")
-                    .subscribeOn(Schedulers.newThread())
+                    .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe {
+                    .subscribe({
                         if (it.result == "success") {
-                            userdata.value = it.User
+                            userdata.value = Resource.success(it.User)
+                        } else {
+                            userdata.value = Resource.error(Throwable("실패"))
                         }
-                    }
+                    }, {
+                        userdata.value = Resource.error(it)
+                    })
         }
     }
 
-    fun GetGoogleSignInClient(context: Context): GoogleSignInClient {
+    fun getGoogleSignInClient(context: Context): GoogleSignInClient {
         return GoogleSignIn.getClient(context, GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(context.getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -50,6 +54,7 @@ class LoginViewModel : BaseViewModel() {
 
 
     fun requestKakaoAuth() {
+        userdata.value= Resource.loading(null)
         val keys = ArrayList<String>()
         keys.add("properties.nickname")
         keys.add("properties.profile_image")
@@ -72,11 +77,15 @@ class LoginViewModel : BaseViewModel() {
                         .setResister(response.kakaoAccount.email, response.nickname, "kakao")
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe {
+                        .subscribe({
                             if (it.result == "success") {
-                                userdata.value = it.User
+                                userdata.value = Resource.success(it.User)
+                            } else {
+                                userdata.value = Resource.error(Throwable("실패"))
                             }
-                        }
+                        }, {
+                            userdata.value = Resource.error(it)
+                        })
             }
         })
     }

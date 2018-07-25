@@ -6,6 +6,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.overseas_football.R
 import com.example.overseas_football.databinding.ActivityLoginBinding
 import com.example.overseas_football.utill.Shared
@@ -39,7 +40,7 @@ class LoginActivity : BaseActivity() {
         }
 
         button_google_auth.setOnClickListener {
-            startActivityForResult(viewmodel.GetGoogleSignInClient(this).signInIntent, GOOGLE_LOGIN_RESULTCODE)
+            startActivityForResult(viewmodel.getGoogleSignInClient(this).signInIntent, GOOGLE_LOGIN_RESULTCODE)
         }
         callback = SessionCallback()
         Session.getCurrentSession().addCallback(callback)
@@ -55,11 +56,21 @@ class LoginActivity : BaseActivity() {
 
     fun requestGoogleandKakaoUserInfo() {
         viewmodel.userdata.observe(this, Observer {
-            if (Shared().getUser(this@LoginActivity) != null) {
-                Shared().removeUser(this@LoginActivity)
+            if (it != null) {
+                when {
+                    it.error -> progressBar.visibility = View.GONE
+                    it.loading -> progressBar.visibility = View.VISIBLE
+                    it.success -> {
+                        progressBar.visibility = View.GONE
+                        if (Shared().getUser(this@LoginActivity) != null) {
+                            Shared().removeUser(this@LoginActivity)
+                        }
+                        Shared().saveUser(this@LoginActivity, it.getData())
+                        finish()
+                    }
+
+                }
             }
-            Shared().saveUser(this@LoginActivity, it)
-            finish()
         })
     }
 
@@ -88,7 +99,7 @@ class LoginActivity : BaseActivity() {
                         val user = FirebaseAuth.getInstance().currentUser
                         user.let {
                             if (it != null) {
-                                viewmodel.GoogleLogin()
+                                viewmodel.googleLogin()
                             }
                         }
                     } else {

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.LinearLayout
 import com.afollestad.materialdialogs.MaterialDialog
@@ -26,6 +27,7 @@ open class BaseFragment : Fragment() {
                 .negativeText("취소")
                 .positiveText("확인")
     }
+
     fun loginOrBeloginView(context: Context, linearLayout: LinearLayout, floatingActionMenu: FloatingActionMenu) {
         if (Shared().getUser(context) != null) {
             linearLayout.visibility = View.GONE
@@ -35,7 +37,8 @@ open class BaseFragment : Fragment() {
             floatingActionMenu.visibility = View.GONE
         }
     }
-    fun isLoginViewCheck(linearLayout_Login:LinearLayout,linearLayout_beLogin:LinearLayout,circleimg_profile:CircleImageView){
+
+    fun isLoginViewCheck(linearLayout_Login: LinearLayout, linearLayout_beLogin: LinearLayout, circleimg_profile: CircleImageView) {
         val user = Shared().getUser(requireContext())
         if (user != null) {
             linearLayout_Login.visibility = View.VISIBLE
@@ -51,7 +54,9 @@ open class BaseFragment : Fragment() {
             Glide.with(requireActivity())
                     .load(loadValue)
                     .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
-                    .apply(RequestOptions.skipMemoryCacheOf(true))
+                    .apply(RequestOptions
+                            .skipMemoryCacheOf(true)
+                            .placeholder(ContextCompat.getDrawable(requireContext(), R.drawable.defalut_profile_img)))
                     .into(circleimg_profile)
             tv_nickname.text = user.nickname
         } else {
@@ -59,6 +64,7 @@ open class BaseFragment : Fragment() {
             linearLayout_beLogin.visibility = View.VISIBLE
         }
     }
+
     fun <T> startActivity(activity: Activity, nextActivity: Class<T>) {
         activity.startActivity(Intent(activity, nextActivity))
     }

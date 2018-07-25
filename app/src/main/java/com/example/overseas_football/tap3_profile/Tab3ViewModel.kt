@@ -6,6 +6,7 @@ import com.example.overseas_football.model.BasicResModel
 import com.example.overseas_football.network.Constants
 import com.example.overseas_football.network.RetrofitClient
 import com.example.overseas_football.base.BaseViewModel
+import com.example.overseas_football.data.Resource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -13,9 +14,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 class Tab3ViewModel : BaseViewModel() {
-    val basicResModel: MutableLiveData<BasicResModel> = MutableLiveData()
+    val basicResModel: MutableLiveData<Resource<BasicResModel>> = MutableLiveData()
 
     fun setProfileImage(imagefile: MultipartBody.Part, email: RequestBody) {
+        basicResModel.value= Resource.loading(null)
         RetrofitClient()
                 .setRetrofit(Constants.BASE_URL)
                 .setProfileImage(imagefile, email)
@@ -23,10 +25,12 @@ class Tab3ViewModel : BaseViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
-                            basicResModel.value = it
+                            if (it.result=="success") {
+                                basicResModel.value = Resource.success(it)
+                            }
                         },
                         onError = {
-                            Log.e("wrwer", it.message)
+                            basicResModel.value = Resource.error(it)
                         }
                 )
     }

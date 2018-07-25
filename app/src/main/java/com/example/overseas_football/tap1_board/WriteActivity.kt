@@ -50,6 +50,7 @@ class WriteActivity : BaseActivity() {
         }
 
         floating_btn_camera.setOnClickListener {
+            floating_menu_button.removeAllMenuButtons()
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .start(this)
