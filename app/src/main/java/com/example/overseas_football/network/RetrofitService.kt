@@ -22,7 +22,8 @@ interface RetrofitService {
                 @Query("apiKey") apiKey: String): Observable<NewsResModel>
 
     @GET("/board")
-    fun getBoard(@Query("limit") limit: Int): Observable<List<BoardResModel>>
+    fun getBoard(@Query("limit") limit: Int,
+                 @Query("size") size: Int): Observable<BoardResModel>
 
     @Multipart
     @POST("/profileImage")

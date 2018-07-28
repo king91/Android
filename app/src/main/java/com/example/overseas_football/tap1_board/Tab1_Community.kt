@@ -1,8 +1,11 @@
 package com.example.overseas_football.tap1_board
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +13,12 @@ import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab1Binding
 import com.example.overseas_football.base.BaseFragment
 import com.example.overseas_football.login.LoginActivity
+import com.example.overseas_football.utill.Shared
 import kotlinx.android.synthetic.main.tab1.*
 import kotlinx.android.synthetic.main.tab1.view.*
 
-class Tab1_Community : BaseFragment() {
+class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener {
+
     private val viewmodel: Tab1ViewModel by lazy {
         ViewModelProviders.of(this@Tab1_Community).get(Tab1ViewModel::class.java)
     }
@@ -24,18 +29,56 @@ class Tab1_Community : BaseFragment() {
                 startActivity(requireActivity(), LoginActivity::class.java)
             }
             root.floating_btn_write.setOnClickListener {
-                floating_menu_button.removeAllMenuButtons()
                 startActivity(requireActivity(), WriteActivity::class.java)
             }
+
             setLifecycleOwner(this@Tab1_Community)
             tab1ViewModel = viewmodel
-            viewmodel.getBoard(5)
+            initView(root)
             return root
         }
     }
 
+    override fun lastPosition(position: Int) {
+        viewmodel.getBoard(position+1,(recyclerview.adapter as BoardAdapter).itemCount)
+    }
+
+    private fun initView(root: View) {
+        if (Shared().getUser(requireContext()) != null) {
+            viewmodel.getBoard(0,0)
+        }
+
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        root.recyclerview.layoutManager = layoutManager
+        root.recyclerview.adapter = BoardAdapter(requireContext(),this)
+        subscribeUI()
+    }
+
+    private fun subscribeUI() {
+        viewmodel.boardLiveData.observe(this, Observer {
+            if (it != null) {
+                when {
+                    it.success -> {
+                        it.getData().let {
+                            if (it != null) {
+                                (recyclerview.adapter as BoardAdapter).addItem(it.boardList?: emptyList(),it.isMoreData?:false)
+                            }
+                        }
+                        progressbar.visibility = View.GONE
+                    }
+                    it.loading -> progressbar.visibility = View.VISIBLE
+                    it.error -> {
+                        progressbar.visibility = View.GONE
+                        showErrorToast(it.throwable?.message ?: "오류가 발생하였습니다.")
+                    }
+                }
+            }
+        })
+    }
+
     override fun onResume() {
-        loginOrBeloginView(requireContext(), linear_belogin, floating_menu_button)
+        loginOrBeloginView(requireContext(), linear_belogin, floating_menu_button, const_board)
         super.onResume()
     }
 }

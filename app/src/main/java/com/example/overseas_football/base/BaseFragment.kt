@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -20,6 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.tab3.*
 
 open class BaseFragment : Fragment() {
+    var isLogin = false
     open fun openBasicDialog(context: Context, title: String, content: String): MaterialDialog.Builder {
         return MaterialDialog.Builder(context)
                 .title(title)
@@ -28,19 +30,29 @@ open class BaseFragment : Fragment() {
                 .positiveText("확인")
     }
 
-    fun loginOrBeloginView(context: Context, linearLayout: LinearLayout, floatingActionMenu: FloatingActionMenu) {
+    open fun showErrorToast(errorMsg: String) {
+        Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun loginOrBeloginView(context: Context,
+                           linearLayout: LinearLayout,
+                           floatingActionMenu: FloatingActionMenu,
+                           boardLayout: LinearLayout) {
         if (Shared().getUser(context) != null) {
             linearLayout.visibility = View.GONE
             floatingActionMenu.visibility = View.VISIBLE
+            boardLayout.visibility = View.VISIBLE
         } else {
             linearLayout.visibility = View.VISIBLE
             floatingActionMenu.visibility = View.GONE
+            boardLayout.visibility = View.GONE
         }
     }
 
     fun isLoginViewCheck(linearLayout_Login: LinearLayout, linearLayout_beLogin: LinearLayout, circleimg_profile: CircleImageView) {
         val user = Shared().getUser(requireContext())
         if (user != null) {
+            isLogin = true
             linearLayout_Login.visibility = View.VISIBLE
             linearLayout_beLogin.visibility = View.GONE
             //사용자 프로필 이미지 유무
@@ -60,6 +72,7 @@ open class BaseFragment : Fragment() {
                     .into(circleimg_profile)
             tv_nickname.text = user.nickname
         } else {
+            isLogin = false
             linearLayout_Login.visibility = View.GONE
             linearLayout_beLogin.visibility = View.VISIBLE
         }
