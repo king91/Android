@@ -52,6 +52,9 @@ class Tab3_MyProfile : BaseFragment() {
             root.btn_login_activity.setOnClickListener {
                 startActivity(Intent(requireContext(), LoginActivity::class.java))
             }
+            root.img_nickname_edit.setOnClickListener {
+                startActivity(Intent(requireContext(), NicknameEditActivity::class.java).putExtra("nickname", tv_nickname.text.toString()))
+            }
             root.btn_logout.setOnClickListener {
                 openBasicDialog(requireActivity(), "로그아웃", "로그아웃 하시겠습니까?")
                         .onPositive { dialog, which ->
@@ -79,12 +82,12 @@ class Tab3_MyProfile : BaseFragment() {
         viewmodel.basicResModel.observe(this, Observer {
             val user = Shared().getUser(requireContext())
             if (it != null && user != null) {
-                when{
-                    it.error->progress_bar.visibility=View.GONE
-                    it.loading->progress_bar.visibility=View.VISIBLE
-                    it.success->{
-                        progress_bar.visibility=View.GONE
-                        val message=it.getData()!!.message
+                when {
+                    it.error -> progress_bar.visibility = View.GONE
+                    it.loading -> progress_bar.visibility = View.VISIBLE
+                    it.success -> {
+                        progress_bar.visibility = View.GONE
+                        val message = it.getData()!!.message
                         user.img = message
                         Shared().saveUser(requireContext(), user)
                         Glide.with(requireActivity())

@@ -58,10 +58,17 @@ class LoginActivity : BaseActivity() {
         viewmodel.userdata.observe(this, Observer {
             if (it != null) {
                 when {
-                    it.error -> progressBar.visibility = View.GONE
-                    it.loading -> progressBar.visibility = View.VISIBLE
+                    it.error -> {
+                        lotie_loading.visibility=View.GONE
+                        lotie_loading.cancelAnimation()
+                    }
+                    it.loading -> {
+                        lotie_loading.visibility=View.VISIBLE
+                        lotie_loading.playAnimation()
+                    }
                     it.success -> {
-                        progressBar.visibility = View.GONE
+                        lotie_loading.visibility=View.GONE
+                        lotie_loading.cancelAnimation()
                         if (Shared().getUser(this@LoginActivity) != null) {
                             Shared().removeUser(this@LoginActivity)
                         }

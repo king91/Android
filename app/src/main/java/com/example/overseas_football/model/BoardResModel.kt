@@ -14,5 +14,5 @@ data class Board(
         val b_time: String,
         val b_nickname: String,
         val b_like: Int,
-        val b_img: String = ""
+        val b_img: String? = ""
 )

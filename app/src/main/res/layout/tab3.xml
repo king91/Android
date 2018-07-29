@@ -37,27 +37,50 @@
                 android:layout_height="90dp"
                 android:background="@drawable/defalut_profile_img" />
 
-            <TextView
-                android:id="@+id/tv_nickname"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:textSize="14dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/img_nickname_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:background="@drawable/edit" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_edit_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="개인정보 변경" />
+                android:background="#FFF2CB3B"
+                android:text="개인정보 변경"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <Button
+                android:layout_marginTop="5dp"
                 android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="로그아웃" />
+                android:background="#FFF2CB3B"
+                android:text="로그아웃"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout

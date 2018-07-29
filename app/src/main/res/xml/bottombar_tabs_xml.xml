@@ -12,7 +12,7 @@
             id="@+id/tab2_news"
             title="뉴스" />
         <tab
-            barColorWhenSelected="#FFCD12"
+            barColorWhenSelected="#f2cb3b"
             icon="@drawable/profile"
             id="@+id/tab3_myprofile"
             title="내정보" />

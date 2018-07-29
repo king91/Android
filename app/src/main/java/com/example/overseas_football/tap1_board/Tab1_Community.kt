@@ -65,11 +65,18 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
                                 (recyclerview.adapter as BoardAdapter).addItem(it.boardList?: emptyList(),it.isMoreData?:false)
                             }
                         }
-                        progressbar.visibility = View.GONE
+                        lotie_loading.visibility=View.GONE
+                        lotie_loading.cancelAnimation()
                     }
-                    it.loading -> progressbar.visibility = View.VISIBLE
+                    it.loading -> {
+                        lotie_loading.visibility=View.VISIBLE
+                        lotie_loading.playAnimation()
+                        Log.e("123","123")
+                        Log.e("123","123")
+                    }
                     it.error -> {
-                        progressbar.visibility = View.GONE
+                        lotie_loading.visibility=View.GONE
+                        lotie_loading.cancelAnimation()
                         showErrorToast(it.throwable?.message ?: "오류가 발생하였습니다.")
                     }
                 }
