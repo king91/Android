@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">해축갤</string>
+    <string name="title_activity_comment">CommentActivity</string>
 </resources>

@@ -51,7 +51,7 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         root.recyclerview.layoutManager = layoutManager
-        root.recyclerview.adapter = BoardAdapter(requireContext(),this)
+        root.recyclerview.adapter = BoardAdapter(requireActivity(),this)
         subscribeUI()
     }
 
@@ -71,8 +71,6 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
                     it.loading -> {
                         lotie_loading.visibility=View.VISIBLE
                         lotie_loading.playAnimation()
-                        Log.e("123","123")
-                        Log.e("123","123")
                     }
                     it.error -> {
                         lotie_loading.visibility=View.GONE

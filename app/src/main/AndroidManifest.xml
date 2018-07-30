@@ -41,7 +41,11 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".tap1_board.WriteActivity" />
-        <activity android:name=".tap3_profile.NicknameEditActivity"></activity>
+        <activity android:name=".tap3_profile.NicknameEditActivity" />
+        <activity
+            android:name=".tap1_board.CommentActivity"
+            android:label="@string/title_activity_comment"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

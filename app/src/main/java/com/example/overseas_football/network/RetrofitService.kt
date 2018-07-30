@@ -29,5 +29,10 @@ interface RetrofitService {
     @POST("/profileImage")
     fun setProfileImage(@Part profileImage: MultipartBody.Part,
                         @Part("email") email: RequestBody): Observable<BasicResModel>
+
+    @FormUrlEncoded
+    @POST("/editNickname")
+    fun updateNickname(@Field("email") email: String,
+                       @Field("edit_nickname") edit_nickname: String): Observable<BasicResModel>
 }
 

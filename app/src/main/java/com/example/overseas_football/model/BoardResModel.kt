@@ -12,7 +12,8 @@ data class Board(
         val b_email: String,
         val b_content: String,
         val b_time: String,
-        val b_nickname: String,
+        val nickname: String,
         val b_like: Int,
-        val b_img: String? = ""
+        val b_img: String? = "",
+        val img:String?=""
 )
