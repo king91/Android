@@ -10,10 +10,10 @@ import io.reactivex.schedulers.Schedulers
 
 class Tab1ViewModel : BaseViewModel() {
     val boardLiveData = MutableLiveData<Resource<BoardResModel>>()
-    fun getBoard(limit: Int, size: Int) {
+    fun getBoard(limit: Int, email:String) {
         boardLiveData.value = Resource.loading(null)
         setRetrofit(BuildConfig.BASE_URL)
-                .getBoard(limit, size)
+                .getBoard(limit, email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

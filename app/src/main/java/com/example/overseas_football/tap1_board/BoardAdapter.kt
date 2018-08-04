@@ -78,6 +78,7 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                         img.visibility = View.GONE
                     }
                 }
+
                 itemList[position].img.let {
                     if (it != null) {
                         circleimg_profile.background = null
@@ -96,6 +97,11 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                         circleimg_profile.background = ContextCompat.getDrawable(context, R.drawable.defalut_profile_img)
                     }
                 }
+
+                itemList[position].b_like.let {
+                    tv_count_like.text=it.toString()+" 개"
+                }
+
                 linear_comment.setOnClickListener {
                     activity.startActivity(Intent(context, CommentActivity::class.java))
                     activity.overridePendingTransition(R.anim.bottom_down, R.anim.bottom_up)

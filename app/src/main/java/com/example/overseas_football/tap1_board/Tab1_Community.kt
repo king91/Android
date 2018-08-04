@@ -40,12 +40,12 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
     }
 
     override fun lastPosition(position: Int) {
-        viewmodel.getBoard(position+1,(recyclerview.adapter as BoardAdapter).itemCount)
+        viewmodel.getBoard(position+1,Shared().getUser(requireContext())?.email?:"")
     }
 
     private fun initView(root: View) {
         if (Shared().getUser(requireContext()) != null) {
-            viewmodel.getBoard(0,0)
+            viewmodel.getBoard(0,Shared().getUser(requireContext())?.email?:"")
         }
 
         val layoutManager = LinearLayoutManager(context)

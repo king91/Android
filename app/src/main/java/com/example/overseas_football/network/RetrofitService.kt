@@ -23,7 +23,7 @@ interface RetrofitService {
 
     @GET("/board")
     fun getBoard(@Query("limit") limit: Int,
-                 @Query("size") size: Int): Observable<BoardResModel>
+                 @Query("email") email: String): Observable<BoardResModel>
 
     @Multipart
     @POST("/profileImage")
