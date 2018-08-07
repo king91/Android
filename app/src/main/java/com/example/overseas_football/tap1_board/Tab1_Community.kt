@@ -13,6 +13,7 @@ import com.example.overseas_football.R
 import com.example.overseas_football.databinding.Tab1Binding
 import com.example.overseas_football.base.BaseFragment
 import com.example.overseas_football.login.LoginActivity
+import com.example.overseas_football.model.Board
 import com.example.overseas_football.utill.Shared
 import kotlinx.android.synthetic.main.tab1.*
 import kotlinx.android.synthetic.main.tab1.view.*
@@ -40,18 +41,33 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
     }
 
     override fun lastPosition(position: Int) {
-        viewmodel.getBoard(position+1,Shared().getUser(requireContext())?.email?:"")
+        viewmodel.getBoard(position + 1, Shared().getUser(requireContext())?.email ?: "")
+    }
+
+    override fun like(num: Int) {
+        viewmodel.like(num, Shared().getUser(requireContext())?.email ?: "")
+    }
+
+    override fun cancelLike(num: Int) {
+        viewmodel.cancelLike(num, Shared().getUser(requireContext())?.email ?: "")
+    }
+
+    override fun removeItem(num: Int, position: Int, board: Board) {
+        viewmodel.removeBoard(num, board)
+        (recyclerview.adapter as BoardAdapter).itemList.remove(board)
+        (recyclerview.adapter as BoardAdapter).notifyItemRemoved(position)
+        (recyclerview.adapter as BoardAdapter).notifyItemRangeChanged(position,(recyclerview.adapter as BoardAdapter).itemList.size)
     }
 
     private fun initView(root: View) {
         if (Shared().getUser(requireContext()) != null) {
-            viewmodel.getBoard(0,Shared().getUser(requireContext())?.email?:"")
+            viewmodel.getBoard(0, Shared().getUser(requireContext())?.email ?: "")
         }
 
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         root.recyclerview.layoutManager = layoutManager
-        root.recyclerview.adapter = BoardAdapter(requireActivity(),this)
+        root.recyclerview.adapter = BoardAdapter(requireActivity(), this)
         subscribeUI()
     }
 
@@ -62,18 +78,44 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
                     it.success -> {
                         it.getData().let {
                             if (it != null) {
-                                (recyclerview.adapter as BoardAdapter).addItem(it.boardList?: emptyList(),it.isMoreData?:false)
+                                (recyclerview.adapter as BoardAdapter).addItem(it.boardList
+                                        ?: emptyList(), it.isMoreData ?: false)
                             }
                         }
-                        lotie_loading.visibility=View.GONE
+                        lotie_loading.visibility = View.GONE
                         lotie_loading.cancelAnimation()
                     }
                     it.loading -> {
-                        lotie_loading.visibility=View.VISIBLE
+                        lotie_loading.visibility = View.VISIBLE
                         lotie_loading.playAnimation()
                     }
                     it.error -> {
-                        lotie_loading.visibility=View.GONE
+                        lotie_loading.visibility = View.GONE
+                        lotie_loading.cancelAnimation()
+                        showErrorToast(it.throwable?.message ?: "오류가 발생하였습니다.")
+                    }
+                }
+            }
+        })
+
+        viewmodel.basicResModelLiveData.observe(this, Observer {
+            if (it != null) {
+                when {
+                    it.success -> {
+                        it.getData().let {
+                            if (it != null && it.result == "success") {
+                                lotie_loading.visibility = View.GONE
+                                lotie_loading.cancelAnimation()
+                                (recyclerview.adapter as BoardAdapter).notifyDataSetChanged()
+                            }
+                        }
+                    }
+                    it.loading -> {
+                        lotie_loading.visibility = View.VISIBLE
+                        lotie_loading.playAnimation()
+                    }
+                    it.error -> {
+                        lotie_loading.visibility = View.GONE
                         lotie_loading.cancelAnimation()
                         showErrorToast(it.throwable?.message ?: "오류가 발생하였습니다.")
                     }

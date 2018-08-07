@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">해축갤</string>
     <string name="title_activity_comment">CommentActivity</string>
+    <array name="more">
+        <item>수정하기</item>
+        <item>삭제하기</item>
+    </array>
 </resources>

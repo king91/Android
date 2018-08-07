@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
+import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.include_toolbar.*
 
 open class BaseActivity : AppCompatActivity(), View.OnClickListener {
@@ -36,6 +37,14 @@ open class BaseActivity : AppCompatActivity(), View.OnClickListener {
 
     open fun setToolbarRightTextColor(color: Int) {
         toolbar_txt_right.setTextColor(ContextCompat.getColor(this, color))
+    }
+
+    open fun showDialog(msg: String): MaterialDialog.Builder {
+        return MaterialDialog.Builder(this)
+                .title(title)
+                .content(msg)
+                .negativeText("취소")
+                .positiveText("확인")
     }
 
     override fun onClick(v: View?) {

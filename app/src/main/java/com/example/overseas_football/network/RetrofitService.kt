@@ -34,5 +34,19 @@ interface RetrofitService {
     @POST("/editNickname")
     fun updateNickname(@Field("email") email: String,
                        @Field("edit_nickname") edit_nickname: String): Observable<BasicResModel>
+
+    @FormUrlEncoded
+    @POST("/like")
+    fun like(@Field("num") num: Int,
+             @Field("req_email") reqEmail: String): Observable<BasicResModel>
+
+    @FormUrlEncoded
+    @POST("/cancelLike")
+    fun cancelLike(@Field("num") num: Int,
+                   @Field("req_email") reqEmail: String): Observable<BasicResModel>
+
+    @FormUrlEncoded
+    @POST("/board/remove")
+    fun removeBoard(@Field("num") num: Int): Observable<BasicResModel>
 }
 

@@ -13,7 +13,7 @@ data class Board(
         val b_content: String,
         val b_time: String,
         val nickname: String,
-        val islike:String,
+        var islike:String,
         val b_like: Int,
         val b_img: String? = "",
         val img:String?=""
