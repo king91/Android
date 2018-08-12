@@ -17,19 +17,19 @@ class Tab3ViewModel : BaseViewModel() {
     val basicResModel: MutableLiveData<Resource<BasicResModel>> = MutableLiveData()
 
     fun setProfileImage(imagefile: MultipartBody.Part, email: RequestBody) {
-        basicResModel.value= Resource.loading(null)
+        basicResModel.value = Resource.loading(null)
         RetrofitClient()
                 .setRetrofit(Constants.BASE_URL)
                 .setProfileImage(imagefile, email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            if (it.result=="success") {
+                .subscribe(
+                        {
+                            if (it.result == "success") {
                                 basicResModel.value = Resource.success(it)
                             }
                         },
-                        onError = {
+                        {
                             basicResModel.value = Resource.error(it)
                         }
                 )

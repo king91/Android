@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="민경운"
+        android:text=""
         android:textColor="#000"
         android:textSize="14dp"
         app:layout_constraintLeft_toRightOf="@+id/circleimg_profile" />
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:text="2018.06.07"
+        android:text=""
         android:textSize="12dp"
         app:layout_constraintLeft_toRightOf="@+id/circleimg_profile"
         app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
@@ -48,8 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="30dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/circleimg_profile" />
 

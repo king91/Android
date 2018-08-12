@@ -75,12 +75,7 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                         img.visibility = View.VISIBLE
                         Glide.with(context)
                                 .load(BuildConfig.BASE_URL + "glideBoard?img=" + it)
-                                .into(object : SimpleTarget<Drawable>() {
-                                    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                                        img.setImageDrawable(resource)
-                                        img.requestLayout()
-                                    }
-                                })
+                                .into(img)
                     } else {
                         Glide.with(context).clear(img)
                         img.visibility = View.GONE
@@ -94,13 +89,7 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                         Glide.with(context)
                                 .load(BuildConfig.BASE_URL + "glideProfile?img=" + it)
                                 .apply(RequestOptions().placeholder(ContextCompat.getDrawable(context, R.drawable.defalut_profile_img)))
-                                .into(object : SimpleTarget<Drawable>() {
-                                    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                                        circleimg_profile.setImageDrawable(resource)
-                                        circleimg_profile.requestLayout()
-                                    }
-
-                                })
+                                .into(circleimg_profile)
                     } else {
                         Glide.with(context).clear(circleimg_profile)
                         circleimg_profile.background = ContextCompat.getDrawable(context, R.drawable.defalut_profile_img)
@@ -161,7 +150,7 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                     val builder: AlertDialog.Builder = AlertDialog.Builder(context)
                     builder.setItems(R.array.more, { dialog, which ->
                         when (which) {
-                            0 -> Log.e("sdf", "sdf")
+                            0 -> context.startActivity(Intent(context, WriteActivity::class.java).putExtra("board", itemList[position]))
                             1 -> {
                                 (activity as BaseActivity)
                                         .showDialog("삭제하시겠습니까?")

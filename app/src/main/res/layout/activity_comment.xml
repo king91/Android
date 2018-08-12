@@ -58,6 +58,7 @@ android:padding="7dp"
     android:layout_weight="1.7"
     android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/tv_resisterComment"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="댓글"

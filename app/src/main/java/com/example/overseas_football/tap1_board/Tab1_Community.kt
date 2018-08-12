@@ -106,7 +106,6 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
                             if (it != null && it.result == "success") {
                                 lotie_loading.visibility = View.GONE
                                 lotie_loading.cancelAnimation()
-                                (recyclerview.adapter as BoardAdapter).notifyDataSetChanged()
                             }
                         }
                     }
