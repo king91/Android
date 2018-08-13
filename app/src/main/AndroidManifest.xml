@@ -43,7 +43,7 @@
         <activity android:name=".tap1_board.WriteActivity" />
         <activity android:name=".tap3_profile.NicknameEditActivity" />
         <activity
-            android:name=".tap1_board.CommentActivity"
+            android:name=".tap1_board.comment.CommentActivity"
             android:label="@string/title_activity_comment"
             android:theme="@style/AppTheme"></activity>
     </application>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".tap1_board.CommentActivity"
+    tools:context=".tap1_board.comment.CommentActivity"
     tools:showIn="@layout/activity_comment">
 
 </android.support.constraint.ConstraintLayout>

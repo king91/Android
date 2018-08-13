@@ -3,21 +3,18 @@ package com.example.overseas_football.tap1_board
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.overseas_football.BuildConfig
 import com.example.overseas_football.R
 import com.example.overseas_football.base.BaseActivity
 import com.example.overseas_football.model.Board
+import com.example.overseas_football.tap1_board.comment.CommentActivity
 import com.example.overseas_football.utill.Shared
 import kotlinx.android.synthetic.main.board_item.view.*
 
@@ -142,7 +139,7 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                 }
 
                 linear_comment.setOnClickListener {
-                    activity.startActivity(Intent(context, CommentActivity::class.java))
+                    activity.startActivity(Intent(context, CommentActivity::class.java).putExtra("board", itemList[position]))
                     activity.overridePendingTransition(R.anim.bottom_down, R.anim.bottom_up)
                 }
 

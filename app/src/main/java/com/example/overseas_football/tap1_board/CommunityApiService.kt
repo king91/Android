@@ -1,6 +1,7 @@
 package com.example.overseas_football.tap1_board
 
 import com.example.overseas_football.model.BasicResModel
+import com.example.overseas_football.model.CommentResModel
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -33,4 +34,13 @@ interface CommunityApiService {
     fun updateContent(@Field("num") num: String,
                       @Field("content") content: String,
                       @Field("type") type: String): Single<BasicResModel>
+
+    @FormUrlEncoded
+    @POST("comment/resister")
+    fun resisterComment(@Field("num") num: String,
+                        @Field("email") email: String,
+                        @Field("comment") comment: String): Single<BasicResModel>
+
+    @GET("comment")
+    fun getComment(@Query("num") num: String): Single<CommentResModel>
 }

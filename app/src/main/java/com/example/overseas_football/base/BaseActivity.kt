@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -53,5 +54,8 @@ open class BaseActivity : AppCompatActivity(), View.OnClickListener {
                 toolbar_img_back.id -> finish()
             }
         }
+    }
+    open fun showErrorToast(errorMsg: String) {
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
     }
 }
