@@ -43,4 +43,8 @@ interface CommunityApiService {
 
     @GET("comment")
     fun getComment(@Query("num") num: String): Single<CommentResModel>
+
+    @FormUrlEncoded
+    @POST("comment/remove")
+    fun removeComment(@Field("c_index") c_index: String): Single<BasicResModel>
 }

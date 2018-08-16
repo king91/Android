@@ -68,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.7"
-            android:background="@drawable/rectangle_white_comment"
+            android:background="@drawable/rectangle_grey_outline_white_background_comment"
             android:maxLength="100"
             android:maxLines="1"
             android:padding="7dp" />
