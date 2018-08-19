@@ -17,12 +17,14 @@ data class Board(
         val b_time: String,
         val nickname: String,
         var islike: String,
+        var b_comment: String,
         val b_like: Int,
         val b_img: String? = "",
         val img: String? = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -40,6 +42,7 @@ data class Board(
             writeString(b_time)
             writeString(nickname)
             writeString(islike)
+            writeString(b_comment)
             writeInt(b_like)
             writeString(b_img)
             writeString(img)

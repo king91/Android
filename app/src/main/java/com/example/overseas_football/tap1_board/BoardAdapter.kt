@@ -19,7 +19,8 @@ import com.example.overseas_football.utill.Shared
 import kotlinx.android.synthetic.main.board_item.view.*
 
 
-class BoardAdapter(val activity: Activity, private val recyclerviewPositionListener: RecyclerviewPositionListener) : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
+class BoardAdapter(val activity: Activity,
+                   private val recyclerviewPositionListener: RecyclerviewPositionListener) : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
     val itemList = ArrayList<Board>()
     var isMoreData = false
 
@@ -57,6 +58,7 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                 tv_nickname.text = itemList[position].nickname
                 tv_date.text = itemList[position].b_time
                 tv_content.text = itemList[position].b_content
+                tv_comment_count.text = itemList[position].b_comment+" 개"
 
                 itemList[position].b_email.let {
                     if (it == Shared().getUser(context)?.email) {
@@ -139,7 +141,7 @@ class BoardAdapter(val activity: Activity, private val recyclerviewPositionListe
                 }
 
                 linear_comment.setOnClickListener {
-                    activity.startActivity(Intent(context, CommentActivity::class.java).putExtra("board", itemList[position]))
+                    activity.startActivityForResult(Intent(context, CommentActivity::class.java).putExtra("board", itemList[position]),0)
                     activity.overridePendingTransition(R.anim.bottom_down, R.anim.bottom_up)
                 }
 

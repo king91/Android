@@ -13,7 +13,9 @@ import io.reactivex.schedulers.Schedulers
 class Tab1ViewModel : BaseViewModel() {
     val boardLiveData = MutableLiveData<Resource<BoardResModel>>()
     val basicResModelLiveData = MutableLiveData<Resource<BasicResModel>>()
-    fun getBoard(limit: Int, email:String) {
+    val commentCountLiveData = MutableLiveData<HashMap<Int, Int>>()
+
+    fun getBoard(limit: Int, email: String) {
         boardLiveData.value = Resource.loading(null)
         setRetrofit(BuildConfig.BASE_URL)
                 .getBoard(limit, email)
@@ -32,39 +34,40 @@ class Tab1ViewModel : BaseViewModel() {
                 })
     }
 
-    fun removeBoard(num:Int,board: Board){
+    fun removeBoard(num: Int, board: Board) {
         boardLiveData.value = Resource.loading(null)
         setRetrofit(BuildConfig.BASE_URL)
                 .removeBoard(num)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    basicResModelLiveData.value= Resource.success(it)
-                },{
-                    basicResModelLiveData.value= Resource.error(it)
+                    basicResModelLiveData.value = Resource.success(it)
+                }, {
+                    basicResModelLiveData.value = Resource.error(it)
                 })
     }
 
-    fun cancelLike(num:Int,email: String){
+    fun cancelLike(num: Int, email: String) {
         setRetrofit(BuildConfig.BASE_URL)
-                .cancelLike(num,email)
+                .cancelLike(num, email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    basicResModelLiveData.value= Resource.success(it)
-                },{
-                    basicResModelLiveData.value= Resource.error(it)
+                    basicResModelLiveData.value = Resource.success(it)
+                }, {
+                    basicResModelLiveData.value = Resource.error(it)
                 })
     }
-    fun like(num: Int,email: String){
+
+    fun like(num: Int, email: String) {
         setRetrofit(BuildConfig.BASE_URL)
-                .like(num,email)
+                .like(num, email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    basicResModelLiveData.value= Resource.success(it)
-                },{
-                    basicResModelLiveData.value= Resource.error(it)
+                    basicResModelLiveData.value = Resource.success(it)
+                }, {
+                    basicResModelLiveData.value = Resource.error(it)
                 })
     }
 }

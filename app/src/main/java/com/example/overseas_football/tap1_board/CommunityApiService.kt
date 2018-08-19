@@ -47,4 +47,9 @@ interface CommunityApiService {
     @FormUrlEncoded
     @POST("comment/remove")
     fun removeComment(@Field("c_index") c_index: String): Single<BasicResModel>
+
+    @FormUrlEncoded
+    @POST("comment/update")
+    fun updateComment(@Field("c_index") c_index: String,
+                      @Field("c_comment") c_comment: String): Single<BasicResModel>
 }

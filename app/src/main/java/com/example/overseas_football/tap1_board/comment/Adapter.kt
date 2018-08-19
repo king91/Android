@@ -22,6 +22,7 @@ class Adapter(val context: Context, private val recyclerviewPositionListener: Re
 
     interface RecyclerviewPositionListener {
         fun removeItem(c_index: Int, position: Int, comment: Comment)
+        fun commentItemUpdate(position: Int, comment: Comment)
     }
 
     fun addItems(comment: List<Comment>) {
@@ -58,6 +59,10 @@ class Adapter(val context: Context, private val recyclerviewPositionListener: Re
                     progressbar.visibility = View.GONE
                     constraint.visibility = View.VISIBLE
 
+                    tv_comment.visibility = View.VISIBLE
+                    edit_item_comment.visibility = View.GONE
+                    tv_comment_update.visibility = View.GONE
+
                     tv_comment.text = comment.c_comment
                     tv_date.text = comment.c_time
                     tv_nickname.text = comment.nickname
@@ -87,6 +92,11 @@ class Adapter(val context: Context, private val recyclerviewPositionListener: Re
                         builder.setItems(R.array.more, { dialog, which ->
                             when (which) {
                                 0 -> {
+                                    tv_comment.visibility = View.GONE
+                                    edit_item_comment.visibility = View.VISIBLE
+                                    tv_comment_update.visibility = View.VISIBLE
+
+                                    edit_item_comment.setText(tv_comment.text.toString())
                                 }
                                 1 -> {
                                     (context as CommentActivity)
@@ -100,6 +110,11 @@ class Adapter(val context: Context, private val recyclerviewPositionListener: Re
                         })
                         val dialog = builder.create()
                         dialog.show()
+                    }
+
+                    tv_comment_update.setOnClickListener {
+                        comment.c_comment = edit_item_comment.text.toString()
+                        recyclerviewPositionListener.commentItemUpdate(position, comment)
                     }
                 }
             }

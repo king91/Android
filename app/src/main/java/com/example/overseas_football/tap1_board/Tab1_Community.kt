@@ -2,6 +2,7 @@ package com.example.overseas_football.tap1_board
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -9,11 +10,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import com.example.overseas_football.R
-import com.example.overseas_football.databinding.Tab1Binding
 import com.example.overseas_football.base.BaseFragment
+import com.example.overseas_football.databinding.Tab1Binding
 import com.example.overseas_football.login.LoginActivity
 import com.example.overseas_football.model.Board
+import com.example.overseas_football.model.Comment
 import com.example.overseas_football.utill.Shared
 import kotlinx.android.synthetic.main.tab1.*
 import kotlinx.android.synthetic.main.tab1.view.*
@@ -30,7 +33,7 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
                 startActivity(requireActivity(), LoginActivity::class.java)
             }
             root.floating_btn_write.setOnClickListener {
-                startActivity(requireActivity(), WriteActivity::class.java)
+                startActivityForResult(Intent(requireActivity(), WriteActivity::class.java), 0)
             }
 
             setLifecycleOwner(this@Tab1_Community)
@@ -56,7 +59,7 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
         viewmodel.removeBoard(num, board)
         (recyclerview.adapter as BoardAdapter).itemList.remove(board)
         (recyclerview.adapter as BoardAdapter).notifyItemRemoved(position)
-        (recyclerview.adapter as BoardAdapter).notifyItemRangeChanged(position,(recyclerview.adapter as BoardAdapter).itemList.size)
+        (recyclerview.adapter as BoardAdapter).notifyItemRangeChanged(position, (recyclerview.adapter as BoardAdapter).itemList.size)
     }
 
     private fun initView(root: View) {
@@ -124,7 +127,26 @@ class Tab1_Community : BaseFragment(), BoardAdapter.RecyclerviewPositionListener
     }
 
     override fun onResume() {
-        loginOrBeloginView(requireContext(), linear_belogin, floating_menu_button, const_board)
         super.onResume()
+        loginOrBeloginView(requireContext(), linear_belogin, floating_menu_button, const_board)
+        Shared().getUser(requireContext()).let {
+            if (it != null) {
+                if (arguments != null) {
+                    val num = arguments!!.getInt("num", 0)
+                    val size = arguments!!.getInt("size", 0)
+
+                    val itemList = (recyclerview.adapter as BoardAdapter).itemList
+                    for (board in itemList) {
+                        if (num == board.num) {
+                            val index = itemList.indexOf(board)
+                            itemList[index].b_comment = size.toString()
+//                            (recyclerview.adapter as BoardAdapter).notifyItemRangeChanged()
+                            recyclerview.scrollToPosition((recyclerview.adapter as BoardAdapter).itemList.size-1)
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
